@@ -32,4 +32,47 @@ describe("selectedTicketReducer", () => {
       }
     });
   });
+  test('Should set ticket to null when given null object', () => {
+    const action2 = {
+      type: 'SET_TICKET_TO_NULL'
+    }
+
+    const { names, location, issue, id } = ticketData;
+    action = {
+      type: 'SELECT_TICKET',
+      names: names,
+      location: location,
+      issue: issue,
+      id: id
+    };
+
+    const state = selectedTicketReducer({}, action);
+
+    expect(selectedTicketReducer(state, action2)).toEqual({
+      selectedTicket: null
+    });
+
+  });
+
 });
+  // test('Should set ticket to null when given null object', () => {
+  //   const { names, location, issue, id } = ticketData;
+  //   action = {
+  //     type: 'SELECT_TICKET',
+  //     names: names,
+  //     location: location,
+  //     issue: issue,
+  //     id: id
+  //   };
+  //   const state = selectedTicketReducer({}, action)
+  //   const action2 = {
+  //     type: 'SELECT_TICKET',
+  //     names: null,
+  //     location: null,
+  //     issue: null,
+  //     id: null
+  //   }
+  //   const state2 = selectedTicketReducer({ state }, action2)
+  //   expect(state2).toEqual(null);
+  // })
+

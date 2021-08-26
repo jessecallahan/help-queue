@@ -10,7 +10,12 @@ export default (state = {}, action) => {
           id: id
         }
       });
+    case 'SET_TICKET_TO_NULL':
+      return Object.assign({}, state, {
+        selectedTicket: null
+      });
     default:
       return state;
-  }
+
+  };
 };
