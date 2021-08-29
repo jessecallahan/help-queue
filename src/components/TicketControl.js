@@ -17,7 +17,7 @@ class TicketControl extends React.Component {
   }
 
   handleClick = () => {
-    if (this.state.selectedTicket != null) {
+    if (Object.keys(this.props.selectedTicket).length !== 0) {
       if (this.props.editing) {
         const { dispatch } = this.props;
         const action = {
@@ -25,10 +25,12 @@ class TicketControl extends React.Component {
         }
         dispatch(action);
       }
-      this.setState({
-        selectedTicket: null,
-        // editing: false
-      });
+
+      const action = {
+        type: 'SET_TICKET_TO_NULL'
+      }
+
+      this.props.dispatch(action);
     } else {
       const { dispatch } = this.props;
       const action = {
@@ -77,7 +79,12 @@ class TicketControl extends React.Component {
       id: id
     }
     dispatch(action);
-    this.setState({ selectedTicket: null });
+    const action3 = {
+      type: 'SET_TICKET_TO_NULL'
+    }
+
+    this.props.dispatch(action3);
+    // this.setState({ selectedTicket: null });
   }
 
   handleEditClick = () => {
@@ -115,26 +122,25 @@ class TicketControl extends React.Component {
       }
       dispatch(action2);
     }
-    this.setState({
-      // editing: false,
-      selectedTicket: null
-    });
+    // this.setState({
+    //   // editing: false,
+    //   selectedTicket: null
+    // });
+    const action3 = {
+      type: 'SET_TICKET_TO_NULL'
+    }
+    dispatch(action3);
   }
 
   render() {
     let currentlyVisibleState = null;
     let buttonText = null;
     const { formVisibleOnPage, editing, masterTicketList, selectedTicket } = this.props;
-    // const { dispatch } = this.props
-    // const action = {
-    //   type: 'SET_TICKET_TO_NULL'
-    // }
-    // dispatch(action);
 
     if (editing) {
       currentlyVisibleState = <EditTicketForm ticket={selectedTicket} onEditTicket={this.handleEditingTicketInList} />
       buttonText = "Return to Ticket List";
-    } else if (selectedTicket != null) {
+    } else if (Object.keys(this.props.selectedTicket).length !== 0) {
       currentlyVisibleState = <TicketDetail ticket={selectedTicket}
         onClickingDelete={this.handleDeletingTicket}
         onClickingEdit={this.handleEditClick}

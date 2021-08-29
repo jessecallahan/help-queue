@@ -3,17 +3,14 @@ export default (state = {}, action) => {
   switch (action.type) {
     case 'SELECT_TICKET':
       return Object.assign({}, state, {
-        selectedTicket: {
-          names: names,
-          location: location,
-          issue: issue,
-          id: id
-        }
+        names: names,
+        location: location,
+        issue: issue,
+        id: id,
+
       });
     case 'SET_TICKET_TO_NULL':
-      return Object.assign({}, state, {
-        selectedTicket: null
-      });
+      return {}
     default:
       return state;
 
