@@ -10,7 +10,7 @@ export default (state = {}, action) => {
 
       });
     case 'SET_TICKET_TO_NULL':
-      return {}
+      return {};
     default:
       return state;
 
